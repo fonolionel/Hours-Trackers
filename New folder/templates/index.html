@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching Hours Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="menu">
+            <a href="{{ url_for('home') }}">HOME</a>
+            <a href="{{ url_for('add_teaching_hours') }}">DETAILS</a>
+            <a href="{{ url_for('validate_teaching_hours') }}">REGISTER MY TEACHING HOURS</a>
+        </div>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+        </div>
+        <a href="loginsignup.html" class="log-link"><button class="log-btn">Logout</button></a>
+    </div>
+    <div class="fpage">
+        <div class="text-container">
+            <span class="phrase hello">Your teaching hours <br> Simplified and <br> Organized.</span>
+            <span class="phrase how">Helping you manage<br> your teaching time <br> with ease.</span>
+        </div>
+        <div class="left">
+            <div class="image">
+                <img src="{{ url_for('static', filename='images/teachers.png') }}" alt="Teachers">
+            </div>
+        </div>
+        <div class="right">
+            <div class="two-but">
+                <a href="{{ url_for('add_teaching_hours') }}"><button class="get-started">Get started...</button></a>
+            </div>
+        </div>
+    </div> 
+    <br><br>
+    <center><h2><strong>Assigned and Completed Hours</strong></h2></center>
+    <!-- Content for displaying and managing classes and subjects -->
+    <div class="sec-page">
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>Teacher</th>
+                    <th>Course</th>
+                    <th>Total Hours</th>
+                    <th>Taught Hours</th>
+                    <th>Remaining Hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in teaching_hours %}
+                <tr>
+                    <td>{{ entry.teacher }}</td>
+                    <td>{{ entry.course }}</td>
+                    <td>{{ entry.total_hours }}</td>
+                    <td>{{ entry.taught_hours }}</td>
+                    <td>{{ entry.total_hours - entry.taught_hours }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Your Company. All Rights Reserved.</p>
+        <p>
+            <a href="{{ url_for('home') }}">Home</a> |
+            <a href="loginsignup.html">Login</a> |
+            <a href="{{ url_for('add_teaching_hours') }}">Details</a>
+        </p>
+    </footer>
+</body>
+</html>
